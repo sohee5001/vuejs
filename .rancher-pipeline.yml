@@ -1,0 +1,35 @@
+stages:
+
+- name: Publish Image
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: ella1/front:${CICD_GIT_TAG}
+      pushRemote: true
+      registry: hub.docker.com/r
+#   env:
+#     PLUGIN_BUILD_ARGS: "script=build-dev"
+  when:
+    event:
+      include:
+      - tag
+
+- name: Deploy
+  steps:
+  - applyYamlConfig:
+      path: ./deployment.yaml
+  when:
+    event:
+      include:
+      - tag
+
+timeout: 60
+
+notification:
+  recipients:
+  - recipient: pipeline
+    notifier: c-hrqpm:n-z248d
+  condition:
+  - Failed
+  - Success
