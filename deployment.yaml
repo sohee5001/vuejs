@@ -62,18 +62,10 @@ spec:
       - name: docker-ella
       containers:
       - name: sh-front
-        image: hub.docker.com/r/ella1/front:${CICD_GIT_TAG}
+        image: nexus.delimanjoo.shop/ella1/front-page2:${CICD_GIT_TAG}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
-#        env:
-#        - name: API_BASE_URL
-#          value: "https://ogw.dev.camp.rg.life"
-#        - name: FILE_BASE_URL
-#          value: "https://file.dev.camp.rg.life"
-#        - name: DEFAULT_BLANK_IMG_URL
-#          value: "https://file.dev.camp.rg.life/blank.png"
-
         resources:
           requests:
             memory: 0.1Gi
