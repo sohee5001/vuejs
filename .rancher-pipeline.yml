@@ -7,6 +7,9 @@ stages:
         tag: ella1/front-page2:${CICD_GIT_TAG}
         pushRemote: true
         registry: ' nexus.delimanjoo.shop'
+    env:
+      PLUGIN_DEBUG: "true"
+      PLUGIN_INSECURE: "true"
   - name: Deploy
     steps:
     - applyYamlConfig:
