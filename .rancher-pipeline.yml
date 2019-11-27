@@ -30,7 +30,7 @@ timeout: 60
 notification:
   recipients:
   - recipient: rlathgml0102@gmail.com
-    notifier: p-n6gsg:p-rxxpj-2
+    notifier: c-jnk2l:n-ftb78
   condition:
   - Failed
   - Success
