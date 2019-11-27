@@ -6,7 +6,7 @@ stages:
       buildContext: .
       tag: ella1/front-page2:${CICD_GIT_TAG}
       pushRemote: true
-      registry: nexus.delimanjoo.shop
+      registry: ' nexus.delimanjoo.shop'
   when:
     event:
       include:
