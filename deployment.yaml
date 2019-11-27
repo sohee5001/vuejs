@@ -59,7 +59,7 @@ spec:
                 - so-web
             topologyKey: kubernetes.io/hostname
       imagePullSecrets:
-      - name: docker-ella
+      - name: so-nexus
       containers:
       - name: so-web
         image: nexus.delimanjoo.shop/ella1/front-page2:${CICD_GIT_TAG}
