@@ -6,9 +6,12 @@ stages:
       buildContext: .
       tag: ella1/front-page2:${CICD_GIT_TAG}
       pushRemote: true
-      registry: nexus.delimanjoo.shop
+      registry: nexus.bucketdata.io
   when:
-    event: [ push, pull_request ]
+    event:
+      include:
+      - push
+      - pull_request
 - name: Deploy
   steps:
   - applyYamlConfig:
