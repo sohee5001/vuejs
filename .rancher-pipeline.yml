@@ -1,26 +1,25 @@
 stages:
-- name: Publish Image
-  steps:
-  - publishImageConfig:
-      dockerfilePath: ./Dockerfile
-      buildContext: .
-      tag: ella1/front-page2:${CICD_GIT_TAG}
-      pushRemote: true
-      registry: ' nexus.delimanjoo.shop'
-  when:
-    branch: [ master, dev ]
-    event: push
-- name: Deploy
-  steps:
-  - applyYamlConfig:
-      path: ./deployment.yaml
-  when:
-    branch:
-      include:
-      - master
-    event:
-      include:
-      - push
+  - name: Publish Image
+    steps:
+    - publishImageConfig:
+        dockerfilePath: ./Dockerfile
+        buildContext: .
+        tag: ella1/front-page2:${CICD_GIT_TAG}
+        pushRemote: true
+        registry: ' nexus.delimanjoo.shop'
+  - name: Deploy
+    steps:
+    - applyYamlConfig:
+        path: ./deployment.yaml
+branch:
+  include: [ master, dev ]
+#  when:
+#    branch:
+#      include:
+#      - master
+#    event:
+#      include:
+#      - push
 timeout: 60
 notification:
   recipients:
