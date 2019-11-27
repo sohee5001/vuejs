@@ -1,5 +1,4 @@
 stages:
-
 - name: Publish Image
   steps:
   - publishImageConfig:
@@ -8,31 +7,28 @@ stages:
       tag: ella1/front-page2:${CICD_GIT_TAG}
       pushRemote: true
       registry: nexus.delimanjoo.shop
-#   env:
-#     PLUGIN_BUILD_ARGS: "script=build-dev"
   when:
     event:
       include:
       - tag
-
 - name: Deploy
   steps:
   - applyYamlConfig:
       path: ./deployment.yaml
   when:
-    branch: master
+    branch:
+      include:
+      - master
     event:
       include:
       - push
-
 timeout: 60
-
 notification:
   recipients:
   - recipient: rlathgml0102@gmail.com
-    notifier: c-jnk2l:n-ftb78
+    notifier: c-jnk2l:n-57xn9
+  message: sohee_rancher pipeline start
   condition:
-  - Failed
   - Success
   - Changed
-  message: "sohee_rancher pipeline start"
+  - Failed
