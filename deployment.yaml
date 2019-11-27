@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: onm-front
-  namespace: sh-front-project
+  name: so-web
+  namespace: so-web
 spec:
   type: ClusterIP
   selector:
-    app: onm-front
+    app: so-web
   ports:
   - name: http
     port: 80
@@ -15,22 +15,22 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: sh-front
-  namespace: app
+  name: so-web
+  namespace: so-web
 spec:
   rules:
-  - host: sohee.delimanjoo.shop
+  - host: so-web.delimanjoo.shop
     http:
       paths:
       - backend:
-          serviceName: sh-front
+          serviceName: so-web
           servicePort: 80
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sh-front
-  namespace: app
+  name: so-web
+  namespace: so-web
 spec:
   replicas: 2
   minReadySeconds: 60
@@ -42,11 +42,11 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: sh-front
+      app: so-web
   template:
     metadata:
       labels:
-        app: sh-front
+        app: so-web
     spec:
       affinity:
         podAntiAffinity:
@@ -56,12 +56,12 @@ spec:
               - key: app
                 operator: In
                 values:
-                - onm-front
+                - so-web
             topologyKey: kubernetes.io/hostname
       imagePullSecrets:
       - name: docker-ella
       containers:
-      - name: sh-front
+      - name: so-web
         image: nexus.delimanjoo.shop/ella1/front-page2:${CICD_GIT_TAG}
         imagePullPolicy: IfNotPresent
         ports:
@@ -69,8 +69,6 @@ spec:
         resources:
           requests:
             memory: 0.1Gi
-#            cpu: 1000m
           limits:
             memory: 0.1Gi
-#            cpu: 1500m
       restartPolicy: Always
