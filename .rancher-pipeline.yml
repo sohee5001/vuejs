@@ -8,10 +8,8 @@ stages:
       pushRemote: true
       registry: ' nexus.delimanjoo.shop'
   when:
-    event:
-      include:
-      - push
-      - pull_request
+    branch: [ master, dev ]
+    event: push
 - name: Deploy
   steps:
   - applyYamlConfig:
