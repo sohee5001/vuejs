@@ -20,16 +20,19 @@ stages:
   - applyYamlConfig:
       path: ./deployment.yaml
   when:
+    branch: master
     event:
       include:
-      - tag
+      - push
 
 timeout: 60
 
 notification:
   recipients:
-  - recipient: pipeline
-    notifier: c-hrqpm:n-z248d
+  - recipient: rlathgml0102@gmail.com
+    notifier: c-jnk2l:n-ftb78
   condition:
   - Failed
   - Success
+  - Changed
+  message: "sohee_rancher pipeline start"
