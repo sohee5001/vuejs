@@ -1,35 +1,35 @@
 stages:
   - name: Publish Image
     steps:
-    - publishImageConfig:
-        dockerfilePath: ./Dockerfile
-        buildContext: .
-        tag: ella1/front-page2:${CICD_GIT_TAG}
-        pushRemote: true
-        registry: so-nexus.delimanjoo.shop
+      - publishImageConfig:
+          dockerfilePath: ./Dockerfile
+          buildContext: .
+          tag: ella1/front-page2:${CICD_GIT_TAG}
+          pushRemote: true
+          registry: so-nexus.delimanjoo.shop
     env:
       PLUGIN_DEBUG: "true"
       PLUGIN_INSECURE: "true"
   - name: Deploy
     steps:
-    - applyYamlConfig:
-        path: ./deployment.yaml
+      - applyYamlConfig:
+          path: ./deployment.yaml
 branch:
-  include: [ master, dev ]
-#  when:
-#    branch:
-#      include:
-#      - master
-#    event:
-#      include:
-#      - push
+  #  include: [ master, develop ]
+  when:
+    branch:
+      include:
+        - master
+    event:
+      include:
+        - tag
 timeout: 60
 notification:
   recipients:
-  - recipient: rlathgml0102@gmail.com
-    notifier: c-jnk2l:n-57xn9
+    - recipient: rlathgml0102@gmail.com
+      notifier: c-jnk2l:n-57xn9
   message: sohee_rancher pipeline start
   condition:
-  - Success
-  - Changed
-  - Failed
+    - Success
+    - Changed
+    - Failed
