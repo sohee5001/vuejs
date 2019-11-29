@@ -6,7 +6,7 @@ stages:
         buildContext: .
         tag: ella1/front-page2:0.1
         pushRemote: true
-        registry: nexus.delimanjoo.shop
+        registry: nexus.bucketdata.io
     env:
       PLUGIN_DEBUG: "true"
       PLUGIN_INSECURE: "true"
