@@ -1,36 +1,36 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: so-web2
-  namespace: so-web2
+  name: so-web
+  namespace: so-app
 spec:
   type: ClusterIP
   selector:
     app: so-web
   ports:
-  - name: http
-    port: 80
-    protocol: TCP
+    - name: http
+      port: 80
+      protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: so-web
-  namespace: so-web2
+  namespace: so-app
 spec:
   rules:
-  - host: so-web2.delimanjoo.shop
-    http:
-      paths:
-      - backend:
-          serviceName: so-web
-          servicePort: 80
+    - host: so-web.delimanjoo.shop
+      http:
+        paths:
+          - backend:
+              serviceName: so-web
+              servicePort: 80
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: so-web
-  namespace: so-web2
+  namespace: so-app
 spec:
   replicas: 2
   minReadySeconds: 60
@@ -51,24 +51,24 @@ spec:
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - so-web
-            topologyKey: kubernetes.io/hostname
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - so-web
+              topologyKey: kubernetes.io/hostname
       imagePullSecrets:
-      - name: so-nexus
+        - name: so-nexus
       containers:
-      - name: so-web
-        image: nexus.delimanjoo.shop/ella1/front-page2:0.1
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 80
-        resources:
-          requests:
-            memory: 0.1Gi
-          limits:
-            memory: 0.1Gi
+        - name: so-web
+          image: so-nexus.delimanjoo.shop/ella1/front-page2:${CICD_GIT_TAG}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: 0.1Gi
+            limits:
+              memory: 0.1Gi
       restartPolicy: Always

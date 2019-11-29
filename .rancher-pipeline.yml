@@ -4,9 +4,9 @@ stages:
     - publishImageConfig:
         dockerfilePath: ./Dockerfile
         buildContext: .
-        tag: ella1/front-page2:0.1
+        tag: ella1/front-page2:${CICD_GIT_TAG}
         pushRemote: true
-        registry: nexus.delimanjoo.shop
+        registry: so-nexus.delimanjoo.shop
     env:
       PLUGIN_DEBUG: "true"
       PLUGIN_INSECURE: "true"
