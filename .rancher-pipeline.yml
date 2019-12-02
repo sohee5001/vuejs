@@ -4,7 +4,7 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: ella1/front-page2:0.2
+      tag: ella1/front-page2:${CICD_GIT_TAG}
       pushRemote: true
       registry: so-nexus.delimanjoo.shop
 #  when:
@@ -23,6 +23,9 @@ stages:
 #        - tag
 
 timeout: 60
+triggerWebhookPr: true
+triggerWebhookPush: true
+triggerWebhookTag: true
 branch:
   include:
   - master
