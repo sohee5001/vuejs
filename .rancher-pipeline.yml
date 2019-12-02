@@ -1,31 +1,26 @@
 stages:
-  # 이미지 생성
-  - name: Publish Image
-    steps:
-      - publishImageConfig:
-          dockerfilePath: ./Dockerfile # Docker 이미지 생성 파일
-          buildContext: .
-          tag: test/pipeline-test:${CICD_GIT_TAG} # 참고 : https://rancher.com/docs/rancher/v2.x/en/k8s-in-rancher/pipelines/#pipeline-variable-substitution-reference
-          pushRemote: true # 선택옵션으로 외부 레지스트리에 Push 여부
-          registry: so-nexus.delimanjoo.shop # 외부 레지스트리 주소
-        when:
-          event: tag # tag 이벤트 발생때 트리거
-  # 배포
-  - name: Deploy
-    steps:
-      - applyYamlConfig:
-          path: ./deployment.yaml # 배포 kubernetes YAML 파일
-        when:
-          event: tag # tag 이벤트 발생때 트리거
+- name: Publish Image
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: test/pipeline-test:${CICD_GIT_TAG}
+      pushRemote: true
+      registry: so-nexus.delimanjoo.shop
+    when:
+      event:
+        include:
+        - tag
+- name: Deploy
+  steps:
+  - applyYamlConfig:
+      path: ./deployment.yaml
+    when:
+      event:
+        include:
+        - tag
 timeout: 60
-triggerWebhookPr: true
-triggerWebhookPush: true
-triggerWebhookTag: true
-branch:
-  include:
-  - master
-  - develop
-
+branch: {}
 notification:
   recipients:
   - recipient: rlathgml0102@gmail.com
