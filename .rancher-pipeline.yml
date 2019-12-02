@@ -6,7 +6,7 @@ stages:
       buildContext: .
       tag: ella1/front-page2:0.2
       pushRemote: true
-      registry: so-nexus.delimanjoo.shop
+      registry: nexus.bucketdata.io
 #  when:
 #   event:
 #     include:
