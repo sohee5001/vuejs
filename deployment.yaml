@@ -62,7 +62,7 @@ spec:
         - name: so-nexus
       containers:
         - name: so-web
-          image: nexus.bucketdata.io/ella1/front-page2:0.2
+          image: so-nexus.delimanjoo.shop/ella1/front-page2:0.2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
