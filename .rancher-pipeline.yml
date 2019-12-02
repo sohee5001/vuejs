@@ -7,20 +7,20 @@ stages:
       tag: ella1/front-page2:${CICD_GIT_TAG}
       pushRemote: true
       registry: so-nexus.delimanjoo.shop
-#  when:
-#   event:
-#     include:
-#     - tag
+  when:
+   event:
+     include:
+     - push
 
 
 - name: Deploy
   steps:
   - applyYamlConfig:
       path: ./deployment.yaml
-#  when:
-#    event:
-#      include:
-#        - tag
+  when:
+    event:
+      include:
+        - push
 
 timeout: 60
 triggerWebhookPr: true
