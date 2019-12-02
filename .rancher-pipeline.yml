@@ -7,27 +7,27 @@ stages:
       tag: ella1/front-page2:0.2
       pushRemote: true
       registry: so-nexus.delimanjoo.shop
-  when:
-   event:
-     include:
-     - tag
+#  when:
+#   event:
+#     include:
+#     - tag
 
 
 - name: Deploy
   steps:
   - applyYamlConfig:
       path: ./deployment.yaml
-  when:
-    event:
-      include:
-        - tag
+#  when:
+#    event:
+#      include:
+#        - tag
 
 timeout: 60
 branch:
   include:
   - master
   - develop
-triggerWebhookTag: true
+
 notification:
   recipients:
   - recipient: rlathgml0102@gmail.com
