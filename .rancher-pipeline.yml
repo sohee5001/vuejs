@@ -9,7 +9,7 @@ stages:
       registry: so-nexus.delimanjoo.shop
     when:
       branch: [ master, develop ]
-      event:  [ push ]
+      event:  [ tag ]
 
 
 - name: Deploy
@@ -18,7 +18,7 @@ stages:
       path: ./deployment.yaml
     when:
       branch: [ master, develop ]
-      event:  [ push ]
+      event:  [ tag ]
 
 timeout: 60
 triggerWebhookPr: true
