@@ -62,7 +62,7 @@ spec:
         - name: so-nexus
       containers:
         - name: so-web
-          image: so-nexus.delimanjoo.shop/ella1/front-page2:${CICD_GIT_TAG}
+          image: so-nexus.delimanjoo.shop/test/pipeline-test:${CICD_GIT_TAG}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
