@@ -8,9 +8,8 @@ stages:
       pushRemote: true
       registry: so-nexus.delimanjoo.shop
   when:
-   event:
-     include:
-     - push
+    branch: [ master, develop ]
+    event:  [ push, pull_request ]
 
 
 - name: Deploy
@@ -18,9 +17,8 @@ stages:
   - applyYamlConfig:
       path: ./deployment.yaml
   when:
-    event:
-      include:
-        - push
+    branch: [ master, develop ]
+    event:  [ push, pull_request ]
 
 timeout: 60
 triggerWebhookPr: true
