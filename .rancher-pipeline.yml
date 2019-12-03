@@ -11,6 +11,10 @@ stages:
       event:
         include:
         - tag
+  when:
+    event:
+      include:
+      - tag
 - name: Deploy
   steps:
   - applyYamlConfig:
@@ -19,6 +23,10 @@ stages:
       event:
         include:
         - tag
+  when:
+    event:
+      include:
+      - tag
 timeout: 60
 notification:
   recipients:
