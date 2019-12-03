@@ -10,7 +10,6 @@ stages:
     when:
       event:
         include:
-        - push
         - tag
 - name: Deploy
   steps:
@@ -19,7 +18,6 @@ stages:
     when:
       event:
         include:
-        - push
         - tag
 timeout: 60
 notification:
