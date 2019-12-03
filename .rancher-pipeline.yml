@@ -19,6 +19,7 @@ stages:
     event:
       include:
       - tag
+
 timeout: 60
 notification:
   recipients:
