@@ -7,10 +7,6 @@ stages:
       tag: test/pipeline-test:${CICD_GIT_TAG}
       pushRemote: true
       registry: so-nexus.delimanjoo.shop
-    when:
-      event:
-        include:
-        - tag
   when:
     event:
       include:
@@ -19,10 +15,6 @@ stages:
   steps:
   - applyYamlConfig:
       path: ./deployment.yaml
-    when:
-      event:
-        include:
-        - tag
   when:
     event:
       include:
