@@ -68,7 +68,7 @@ spec:
             - containerPort: 80
           resources:
             requests:
-              memory: 0.1Gi
+              memory: 0.2Gi
             limits:
-              memory: 0.1Gi
+              memory: 0.2Gi
       restartPolicy: Always
